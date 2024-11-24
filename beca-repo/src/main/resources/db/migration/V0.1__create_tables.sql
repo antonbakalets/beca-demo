@@ -4,7 +4,7 @@
 CREATE TABLE user_login (
     id                  INT AUTO_INCREMENT PRIMARY KEY,
     username            VARCHAR(100) NOT NULL,
-    password            VARCHAR(100) NOT NULL,
+    password_hash       VARCHAR(100) NOT NULL,
     first_name          VARCHAR(100) NOT NULL,
     last_name           VARCHAR(100) NOT NULL
 );
@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS tx_action (
     debit_amount    DECIMAL(15, 5) NULL,
     credit_account  INT NULL,
     credit_amount   DECIMAL(15, 5) NULL,
-    tx_comment      VARCHAR(250) NULL,
+    comment         VARCHAR(250) NULL,
     CONSTRAINT fk_tx_debit
         FOREIGN KEY (debit_account) REFERENCES account (id)
         ON DELETE NO ACTION ON UPDATE NO ACTION,

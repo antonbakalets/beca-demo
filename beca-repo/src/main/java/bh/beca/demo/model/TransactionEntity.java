@@ -1,13 +1,20 @@
 package bh.beca.demo.model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.io.Serializable;
-import java.math.BigDecimal;
-import java.time.LocalDate;
 
 @Entity
 @Table(name = "tx_action")
@@ -19,13 +26,11 @@ public class TransactionEntity implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    @SequenceGenerator(name = "sequenceGenerator")
-    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "tx_date")
-    private LocalDate txDate;
+    private LocalDateTime txDate;
 
     @JoinColumn(name = "debit_account", referencedColumnName = "id")
     @ManyToOne(fetch = FetchType.LAZY)
@@ -34,7 +39,7 @@ public class TransactionEntity implements Serializable {
     @Column(name = "debit_amount", precision = 15, scale = 5)
     private BigDecimal debitAmount;
 
-    @JoinColumn(name = "credit", referencedColumnName = "id")
+    @JoinColumn(name = "credit_account", referencedColumnName = "id")
     @ManyToOne(fetch = FetchType.LAZY)
     private AccountEntity creditAccount;
 
