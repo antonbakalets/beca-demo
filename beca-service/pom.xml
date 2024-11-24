@@ -11,4 +11,10 @@
 
     <artifactId>beca-service</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>bh.beca</groupId>
+            <artifactId>beca-repo</artifactId>
+        </dependency>
+    </dependencies>
 </project>
