@@ -45,19 +45,16 @@ public class TransactionInsertCommand {
     @Transactional
     public AccountEntity execute() {
         AccountEntity account = new AccountEntity();
-        account.setName("No name");
+        account.setName("Account " + accountRepository.count());
         account.setOwner(userRepository.getReferenceById(customerId));
         account.setTotal(amount);
 
-        if (amount.compareTo(BigDecimal.ZERO) > 0) {
-            AccountEntity bonusDebitAccount = accountRepository.getBonusDebitAccount();
-
+        if (BigDecimal.ZERO.compareTo(amount) < 0) {
             TransactionEntity transaction = new TransactionEntity();
             transaction.setTxDate(now());
-            transaction.setCreditAccount(account);
-            transaction.setCreditAmount(amount);
-            transaction.setDebitAccount(bonusDebitAccount);
-            transaction.setDebitAmount(amount);
+            transaction.setAccount(account);
+            transaction.setAmount(amount);
+            transaction.setComment("Initial transfer to " + account.getName());
             transactionRepository.save(transaction);
         }
 

@@ -7,9 +7,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.MapsId;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -37,8 +36,11 @@ public class AccountEntity implements Serializable {
     @Column(name = "total", precision = 15, scale = 5)
     private BigDecimal total;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "owner", referencedColumnName = "id", unique = true)
     private UserEntity owner;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "account")
+    private List<TransactionEntity> transactions;
 
 }

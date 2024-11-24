@@ -32,19 +32,12 @@ public class TransactionEntity implements Serializable {
     @Column(name = "tx_date")
     private LocalDateTime txDate;
 
-    @JoinColumn(name = "debit_account", referencedColumnName = "id")
+    @JoinColumn(name = "account", referencedColumnName = "id")
     @ManyToOne(fetch = FetchType.LAZY)
-    private AccountEntity debitAccount;
+    private AccountEntity account;
 
-    @Column(name = "debit_amount", precision = 15, scale = 5)
-    private BigDecimal debitAmount;
-
-    @JoinColumn(name = "credit_account", referencedColumnName = "id")
-    @ManyToOne(fetch = FetchType.LAZY)
-    private AccountEntity creditAccount;
-
-    @Column(name = "credit_amount", precision = 15, scale = 5)
-    private BigDecimal creditAmount;
+    @Column(name = "amount", precision = 15, scale = 5)
+    private BigDecimal amount;
 
     @Column(name = "comment")
     private String comment;
