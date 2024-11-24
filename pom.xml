@@ -12,7 +12,7 @@
 	<groupId>bh.beca</groupId>
 	<artifactId>beca-demo</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>beca-demo</name>
+	<name>Beca project</name>
 	<description>Demo backend coding assignment</description>
 	<packaging>pom</packaging>
 

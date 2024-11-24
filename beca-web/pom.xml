@@ -10,7 +10,7 @@
     </parent>
     <artifactId>beca-web</artifactId>
 
-    <name>beca-demo</name>
+    <name>Beca web layer</name>
     <description>Demo backend coding assignment</description>
 
 
@@ -21,7 +21,7 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter</artifactId>
+            <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
         <dependency>

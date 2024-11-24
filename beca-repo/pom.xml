@@ -10,6 +10,7 @@
     </parent>
 
     <artifactId>beca-repo</artifactId>
+    <name>Beca access layer</name>
 
     <dependencies>
         <dependency>
