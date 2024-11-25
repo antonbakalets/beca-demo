@@ -20,6 +20,18 @@
             <artifactId>beca-service</artifactId>
         </dependency>
         <dependency>
+            <groupId>bh.beca</groupId>
+            <artifactId>beca-service-impl</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>bh.beca</groupId>
+            <artifactId>beca-repo</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
+
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>

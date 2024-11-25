@@ -23,8 +23,9 @@
 	<modules>
 		<module>beca-web</module>
 		<module>beca-service</module>
+        <module>beca-service-impl</module>
 		<module>beca-repo</module>
-	</modules>
+    </modules>
 
 	<dependencyManagement>
 		<dependencies>
@@ -36,6 +37,11 @@
 			<dependency>
 				<groupId>bh.beca</groupId>
 				<artifactId>beca-service</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>bh.beca</groupId>
+				<artifactId>beca-service-impl</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 		</dependencies>
