@@ -1,7 +1,7 @@
 package bh.beca.demo.web;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -36,12 +36,12 @@ class AccountControllerTest {
         output.setName("Account Test");
         output.setTotal(new BigDecimal("5"));
 
-        when(accountService.createAccount(eq(0), any(AccountCreateDto.class))).thenReturn(output);
+        when(accountService.createAccount(anyLong(), any(AccountCreateDto.class))).thenReturn(output);
 
         mockMvc.perform(post("/api/v1/customers/0/accounts")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("{\"initialCredit\": \"5\"}"))
                 .andExpect(status().isOk())
-                .andExpect(content().json("{\"id\":1,\"name\":\"Account Test\",\"total\":5}"));
+                .andExpect(content().json("{\"id\":124,\"name\":\"Account Test\",\"total\":5}"));
     }
 }
