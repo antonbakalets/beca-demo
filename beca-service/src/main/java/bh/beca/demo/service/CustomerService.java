@@ -2,11 +2,14 @@ package bh.beca.demo.service;
 
 import bh.beca.demo.dto.CustomerDto;
 import bh.beca.demo.dto.CustomerSummaryDto;
-import bh.beca.demo.model.AccountEntity;
-import bh.beca.demo.model.CustomerSummary;
-import bh.beca.demo.model.TransactionEntity;
+import bh.beca.demo.mapper.CustomerMapper;
+import bh.beca.demo.mapper.SummaryMapper;
+import bh.beca.demo.model.SummaryView;
+import bh.beca.demo.model.UserEntity;
 import bh.beca.demo.repository.CustomerSummaryRepository;
+import bh.beca.demo.repository.UserRepository;
 import java.util.List;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -17,49 +20,19 @@ import org.springframework.stereotype.Service;
 public class CustomerService {
 
     private final CustomerSummaryRepository customerSummaryRepository;
+    private final SummaryMapper summaryMapper;
+    private final UserRepository userRepository;
+    private final CustomerMapper customerMapper;
 
-    public CustomerSummaryDto getSummary(long id) {
-        return convert(customerSummaryRepository.findById(id));
-    }
-
-    private CustomerSummaryDto convert(CustomerSummary summary) {
-        return CustomerSummaryDto.builder()
-                .id(summary.getId())
-                .firstName(summary.getFirstName())
-                .lastName(summary.getLastName())
-                .accounts(summary.getAccounts().stream().map(this::convert).toList())
-                .build();
-    }
-
-    private CustomerSummaryDto.AccountSummaryDto convert(AccountEntity account) {
-        return CustomerSummaryDto.AccountSummaryDto.builder()
-                .id(account.getId())
-                .name(account.getName())
-                .total(account.getTotal())
-                .transactions(account.getTransactions().stream().map(this::convert).toList())
-                .build();
-    }
-
-    private CustomerSummaryDto.TransactionSummaryDto convert(TransactionEntity transaction) {
-        return CustomerSummaryDto.TransactionSummaryDto.builder()
-                .id(transaction.getId())
-                .created(transaction.getTxDate())
-                .amount(transaction.getAmount())
-                .comment(transaction.getComment())
-                .build();
+    public Optional<CustomerSummaryDto> getSummary(long id) {
+        log.debug("Creating summary for customer id: {}", id);
+        List<SummaryView> view = customerSummaryRepository.viewById(id);
+        return summaryMapper.map(view);
     }
 
     public List<CustomerDto> getAll() {
-        return customerSummaryRepository.findAll().stream()
-                .map(this::transform)
-                .toList();
-    }
-
-    private CustomerDto transform(CustomerSummary customer) {
-        return CustomerDto.builder()
-                .id(customer.getId())
-                .firstName(customer.getFirstName())
-                .lastName(customer.getLastName())
-                .build();
+        log.debug("Getting all customers");
+        List<UserEntity> users = userRepository.findAll();
+        return customerMapper.map(users);
     }
 }

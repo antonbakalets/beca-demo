@@ -10,9 +10,11 @@ import lombok.Getter;
 public class TransactionDto {
 
     private long id;
+
     private LocalDateTime txDate;
 
     private String account;
+
     private BigDecimal amount;
 
     private String comment;
