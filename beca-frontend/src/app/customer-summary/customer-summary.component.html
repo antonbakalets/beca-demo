@@ -1,14 +1,34 @@
 <div *ngIf="customer; else loading">
     {{customer.firstName}} {{customer.lastName}}
+
+    <form #creditForm="ngForm" (ngSubmit)="onSubmit(creditForm)">
+        <div>
+            <label for="credit">Initial Credit:</label>
+            <input type="text" id="credit" name="credit" [(ngModel)]="accountCreate.initialCredit" required/>
+        </div>
+        <button type="submit" [disabled]="creditForm.invalid">Submit</button>
+    </form>
+
     <p>
         Accounts:
+    <ul>
         <li *ngFor="let account of customer.accounts">
             <span hidden="hidden">{{ account.id }}</span>
-            {{ account.name }}: {{ account.total }}
+            {{ account.name }} total is: {{ account.total }}
+            <ul *ngIf="account.transactions; else txLoading">
+                <li *ngFor="let transaction of account.transactions">
+                    <span hidden="hidden">{{ transaction.id }}</span>
+                    on {{ transaction.created }} a transaction of {{ transaction.amount }} has been made with comment: {{ transaction.comment }}
+                </li>
+            </ul>
+            <ng-template #txLoading>
+                <p>No transactions.</p>
+            </ng-template>
         </li>
-    </p>
+    </ul>
 </div>
 
 <ng-template #loading>
     <p>Could not find customer with id {{customerId}}.</p>
 </ng-template>
+

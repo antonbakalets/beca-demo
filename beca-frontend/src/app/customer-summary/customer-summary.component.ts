@@ -2,22 +2,27 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DataService } from '../services/data.service';
 import { Customer } from '../models/customer';
+import { AccountCreate } from '../models/account-create';
 import { NgFor, NgIf } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-customer-summary',
-  imports: [NgFor, NgIf],
+  imports: [NgFor, NgIf, FormsModule],
   templateUrl: './customer-summary.component.html',
   styleUrl: './customer-summary.component.css'
 })
 export class CustomerSummaryComponent implements OnInit {
   customer: Customer | undefined;
   customerId: number = -1;
+  accountCreate: AccountCreate;
 
   constructor(
     private route: ActivatedRoute,
     private dataService: DataService
-  ) {}
+  ) {
+    this.accountCreate = {initialCredit: 0};
+  }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
@@ -32,4 +37,19 @@ export class CustomerSummaryComponent implements OnInit {
       error: (err) => console.error('Error fetching customer details', err),
     });
   }
+
+  onSubmit(form: any): void {
+      if (form.valid) {
+        this.dataService.addCredit(this.customerId, this.accountCreate).subscribe({
+          next: (response) => {
+            console.log('Credit added successfully:', response);
+            form.reset();
+            this.getCustomerDetails();
+          },
+          error: (err) => {
+            console.error('Error adding credit:', err);
+          },
+        });
+      }
+    }
 }

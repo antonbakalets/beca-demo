@@ -1,6 +1,6 @@
 export interface Transaction {
   id: number;
-  txDate: string;
+  created: string;
   amount: number;
   comment: string;
 }
