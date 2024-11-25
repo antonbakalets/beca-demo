@@ -30,17 +30,22 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-m2-
 
-      - name: Use Node.js
+      - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20.x'
+          node-version: '20'
 
-      - name: Build with Maven
+      - name: Set up Angular
+        run: npm install -g @angular/cli
+
+      - name: Build Angular frontend and copy to static content
         run: |
           cd beca-frontend
           npm run build:prod
           cd ..
-          mvn clean verify
+
+      - name: Build with Maven
+        run: mvn clean verify
 
       - name: SonarQube Scan
         env:
