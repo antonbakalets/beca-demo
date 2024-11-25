@@ -1,10 +1,12 @@
 package bh.beca.demo.service;
 
+import bh.beca.demo.dto.CustomerDto;
 import bh.beca.demo.dto.CustomerSummaryDto;
 import bh.beca.demo.model.AccountEntity;
 import bh.beca.demo.model.CustomerSummary;
 import bh.beca.demo.model.TransactionEntity;
 import bh.beca.demo.repository.CustomerSummaryRepository;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -44,6 +46,20 @@ public class CustomerService {
                 .created(transaction.getTxDate())
                 .amount(transaction.getAmount())
                 .comment(transaction.getComment())
+                .build();
+    }
+
+    public List<CustomerDto> getAll() {
+        return customerSummaryRepository.findAll().stream()
+                .map(this::transform)
+                .toList();
+    }
+
+    private CustomerDto transform(CustomerSummary customer) {
+        return CustomerDto.builder()
+                .id(customer.getId())
+                .firstName(customer.getFirstName())
+                .lastName(customer.getLastName())
                 .build();
     }
 }

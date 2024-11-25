@@ -1,0 +1,14 @@
+<div *ngIf="customer; else loading">
+    {{customer.firstName}} {{customer.lastName}}
+    <p>
+        Accounts:
+        <li *ngFor="let account of customer.accounts">
+            <span hidden="hidden">{{ account.id }}</span>
+            {{ account.name }}: {{ account.total }}
+        </li>
+    </p>
+</div>
+
+<ng-template #loading>
+    <p>Could not find customer with id {{customerId}}.</p>
+</ng-template>
