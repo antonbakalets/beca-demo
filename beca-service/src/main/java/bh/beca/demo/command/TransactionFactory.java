@@ -1,13 +1,10 @@
 package bh.beca.demo.command;
 
-import lombok.Setter;
+import java.math.BigDecimal;
 import org.springframework.beans.factory.annotation.Lookup;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
-
-@Service
+@Component
 public interface TransactionFactory {
 
     @Lookup

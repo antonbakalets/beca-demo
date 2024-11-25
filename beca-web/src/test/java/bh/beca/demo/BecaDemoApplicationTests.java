@@ -8,6 +8,7 @@ class BecaDemoApplicationTests {
 
 	@Test
 	void contextLoads() {
+		// Spring context should load
 	}
 
 }
