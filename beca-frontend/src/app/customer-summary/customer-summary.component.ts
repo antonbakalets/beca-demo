@@ -7,10 +7,10 @@ import { NgFor, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-customer-summaryView',
+  selector: 'app-customer-summary',
   imports: [NgFor, NgIf, FormsModule],
-  templateUrl: './customer-summaryView.component.html',
-  styleUrl: './customer-summaryView.component.css'
+  templateUrl: './customer-summary.component.html',
+  styleUrl: './customer-summary.component.css'
 })
 export class CustomerSummaryComponent implements OnInit {
   customer: Customer | undefined;
