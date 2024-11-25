@@ -35,12 +35,10 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Set up Angular
-        run: npm install
-
       - name: Build Angular frontend and copy to static content
         run: |
           cd beca-frontend
+          npm install
           npm run build:prod
           cd ..
 
