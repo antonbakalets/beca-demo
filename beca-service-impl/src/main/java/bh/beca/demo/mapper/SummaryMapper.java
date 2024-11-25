@@ -19,6 +19,7 @@ public class SummaryMapper {
             SummaryView customer = view.get(0);
 
             Map<Long, List<SummaryView>> byAccountId = view.stream()
+                    .filter(account -> Objects.nonNull(account.getAccountId()))
                     .collect(Collectors.groupingBy(SummaryView::getAccountId));
 
             return Optional.of(CustomerSummaryDto.builder()

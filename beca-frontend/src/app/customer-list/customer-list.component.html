@@ -1,9 +1,10 @@
 <div *ngIf="customers.length > 0; else noData">
-    <h1>Items List</h1>
+    <h1>Customer list</h1>
     <ul>
         <li *ngFor="let customer of customers">
+            Login as
             <a [routerLink]="['/customers', customer.id]">
-              Login as {{ customer.firstName }} {{ customer.lastName }}
+              {{ customer.firstName }} {{ customer.lastName }}
             </a>
         </li>
     </ul>
