@@ -23,6 +23,8 @@ cd ..
 mkdir beca-web/src/main/resources/static
 cp -r beca-frontend/dist/beca-frontend/browser/* beca-web/src/main/resources/static/ -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
 
+mvn clean verify
+
 mvn spring-boot:run
 ```
 
