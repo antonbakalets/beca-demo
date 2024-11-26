@@ -66,6 +66,20 @@ class CustomerServiceImplTest {
     }
 
     @Test
+    void getSummaryNoAccounts() {
+        when(customerSummaryRepository.viewById(14L)).thenReturn(List.of(
+                new SummaryView(14L, "Fn", "Ln", null, null, null, null, null, null, null)
+        ));
+
+        Optional<CustomerSummaryDto> optionalSummary = customerService.getSummary(14L);
+        assertThat(optionalSummary).isNotEmpty();
+
+        CustomerSummaryDto actual = optionalSummary.get();
+        assertThat(actual.getId()).isEqualTo(14L);
+        assertThat(actual.getAccounts()).isEmpty();
+    }
+
+    @Test
     void getAllEmpty() {
         List<CustomerDto> customers = customerService.getAll();
         assertThat(customers).isEmpty();

@@ -41,4 +41,11 @@ class CustomerControllerTest {
         mockMvc.perform(get("/api/v1/customers/54"))
                 .andExpect(status().isNotFound());
     }
+
+    @Test
+    void allCustomers() throws Exception {
+        mockMvc.perform(get("/api/v1/customers"))
+                .andExpect(status().isOk())
+                .andExpect(content().json("[]"));
+    }
 }
