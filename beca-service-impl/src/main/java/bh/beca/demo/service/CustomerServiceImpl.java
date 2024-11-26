@@ -33,7 +33,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public List<CustomerDto> getAll() {
-        log.debug("Getting all customers");
+        log.debug("Reading all customers");
         List<UserEntity> users = userRepository.findAll();
         return customerMapper.map(users);
     }
