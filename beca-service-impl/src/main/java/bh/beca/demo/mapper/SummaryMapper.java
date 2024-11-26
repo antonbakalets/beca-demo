@@ -36,17 +36,13 @@ public class SummaryMapper {
     }
 
     private Optional<CustomerSummaryDto.AccountSummaryDto> mapAccount(List<SummaryView> oneAccountsGroup) {
-        if (oneAccountsGroup.isEmpty()) {
-            return Optional.empty();
-        } else {
-            SummaryView account = oneAccountsGroup.get(0);
-            return Optional.of(CustomerSummaryDto.AccountSummaryDto.builder()
-                    .id(account.getAccountId())
-                    .name(account.getAccountName())
-                    .total(account.getAccountTotal())
-                    .transactions(mapTransactions(oneAccountsGroup))
-                    .build());
-        }
+        SummaryView account = oneAccountsGroup.get(0);
+        return Optional.of(CustomerSummaryDto.AccountSummaryDto.builder()
+                .id(account.getAccountId())
+                .name(account.getAccountName())
+                .total(account.getAccountTotal())
+                .transactions(mapTransactions(oneAccountsGroup))
+                .build());
     }
 
     private List<CustomerSummaryDto.TransactionSummaryDto> mapTransactions(List<SummaryView> transactionsGroup) {
