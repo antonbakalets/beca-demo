@@ -4,7 +4,31 @@
 
 A small backend project.
 
-See:
+### Execute
+
+Prerequisites to build and to run the project are:
+
+- Java 17 is installed
+- Maven is installed 
+- Node.js 20 is installed
+
+
+To start the project run commands:
+
+```shell
+cd beca-frontend
+npm install
+npm run build
+cd ..
+mkdir beca-web/src/main/resources/static
+cp -r beca-frontend/dist/beca-frontend/browser/* beca-web/src/main/resources/static/ -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
+
+mvn spring-boot:run
+```
+
+The project should be available at [localhost:8080](http://localhost:8080)
+
+See also:
 
  - https://github.com/antonbakalets/beca-demo/actions - GitHub Actions
  - https://sonarcloud.io/project/overview?id=antonbakalets_beca-demo Sonar Cloud
