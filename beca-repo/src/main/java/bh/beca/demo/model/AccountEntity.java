@@ -40,7 +40,6 @@ public class AccountEntity implements Serializable {
     @JoinColumn(name = "owner", referencedColumnName = "id", unique = true)
     private UserEntity owner;
 
-    @SuppressWarnings("javaarchitecture:S7027")
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "account")
     private List<TransactionEntity> transactions;
 

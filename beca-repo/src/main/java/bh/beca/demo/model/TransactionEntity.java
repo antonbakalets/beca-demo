@@ -21,6 +21,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode
+@SuppressWarnings("javaarchitecture:S7027")
 public class TransactionEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
